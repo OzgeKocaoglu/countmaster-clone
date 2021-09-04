@@ -20,7 +20,6 @@ public class Operator : MonoBehaviour
         _operatorText = gameObject.GetComponentInChildren<TMP_Text>();
         OperatorUISwitch();
     }
-
     private void OnTriggerEnter(Collider other)
     {
         if(other.gameObject.tag == "Player")
@@ -29,7 +28,6 @@ public class Operator : MonoBehaviour
             StackManager.On_AddingStack?.Invoke(_operatorValue, type);
         }
     }
-
     private void OperatorUISwitch()
     {
         switch (type)

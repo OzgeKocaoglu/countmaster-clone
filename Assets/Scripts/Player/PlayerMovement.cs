@@ -20,7 +20,6 @@ public class PlayerMovement : MonoBehaviour
     {
         transform.Translate(transform.forward * Time.deltaTime * _forwardSpeed);
     }
-
     private void SwerveMove()
     {
         float clampedHorizontal = Mathf.Clamp(transform.position.x + joystick.Horizontal * _swerveSpeed * Time.deltaTime, _minHorizontalMovementBorder, _maxHorizontalMovementBorder);

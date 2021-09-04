@@ -1,24 +1,45 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using System;
 
 public class StackManager : MonoBehaviour
 {
-    public delegate void StackHandler(int numOfCharacter, OperatorType operatorType);
-    public static StackHandler On_AddingStack;
-
     [SerializeField] private GameObject _stackPivot;
     private int _numberOfStackCount;
+
+    public int NumberOfStackCount
+    {
+        get
+        {
+            return _numberOfStackCount;
+        }
+        set
+        {
+            if(_numberOfStackCount != value)
+            {
+                On_StackNumberChange?.Invoke(_numberOfStackCount, value);
+                _numberOfStackCount = value;
+            }
+
+        }
+    }
+
+    public delegate void StackHandler(int numOfCharacter, OperatorType operatorType);
+    public static StackHandler On_AddingStack;
+    public event Action<int, int> On_StackNumberChange;
 
     private void Awake()
     {
         On_AddingStack += AddCharacterOnStack;
+        On_StackNumberChange += CreateCharacter;
         _numberOfStackCount = 1;
     }
 
     private void OnDestroy()
     {
         On_AddingStack -= AddCharacterOnStack;
+        On_StackNumberChange -= CreateCharacter;
     }
 
     private void AddCharacterOnStack(int numOfCharacter, OperatorType operatorType)
@@ -27,20 +48,28 @@ public class StackManager : MonoBehaviour
         {
             case OperatorType.Add:
                 Debug.Log($"Adding Character on stack: {numOfCharacter}");
-                _numberOfStackCount += numOfCharacter;
-                Debug.Log($"Current stack number is {_numberOfStackCount}");
+                NumberOfStackCount += numOfCharacter;
+                Debug.Log($"Current stack number is {NumberOfStackCount}");
                 break;
             case OperatorType.Mul:
                 Debug.Log($"Mul Character on stack: {numOfCharacter}");
-                int sum = _numberOfStackCount * numOfCharacter;
-                _numberOfStackCount = sum;
-                Debug.Log($"Current stack number is {_numberOfStackCount}");
+                int sum = NumberOfStackCount * numOfCharacter;
+                NumberOfStackCount = sum;
+                Debug.Log($"Current stack number is {NumberOfStackCount}");
                 break;
             default:
                 Debug.Log("Invalid operator.");
                 break;
         }
     }
-
-
+    private void CreateCharacter(int beforeNumberOfStack, int lastNumberOfStack)
+    {
+        int tempCount = beforeNumberOfStack;
+        while(tempCount != lastNumberOfStack)
+        {
+            GameObject temp = ObjectManager.Instance.SpawnFromPool("Character", _stackPivot.transform.position, Quaternion.identity);
+            temp.transform.parent = _stackPivot.transform;
+            tempCount++;
+        }
+    }
 }
