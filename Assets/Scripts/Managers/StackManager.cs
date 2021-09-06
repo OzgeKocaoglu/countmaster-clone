@@ -1,13 +1,14 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
-using System;
 using DG.Tweening;
+using System;
 
 public class StackManager : MonoBehaviour
 {
     [SerializeField] private GameObject _stackPivot;
     private int _numberOfStackCount;
+    private int numberOfObjects = 4;
     public float radius = 1f;
     private List<GameObject> stackObjects;
 
@@ -69,13 +70,23 @@ public class StackManager : MonoBehaviour
     {
         int tempCount = beforeNumberOfStack;
 
-        while(tempCount != lastNumberOfStack)
+        for (int i = 0; i < lastNumberOfStack; i++)
         {
-            GameObject temp = ObjectManager.Instance.SpawnFromPool(Constants.Character, _stackPivot.transform.position, Quaternion.identity);
-            temp.transform.parent = _stackPivot.transform;
-            temp.transform.DOScale(1, 1);
-            tempCount++;
+            var spawned = ObjectManager.Instance.SpawnFromPool(Constants.Character, _stackPivot.transform.position, Quaternion.identity);
+
+            spawned.transform.parent = _stackPivot.transform;
+            spawned.GetComponent<Rigidbody>().velocity = transform.TransformDirection(Vector3.forward * 3);
+           
+            spawned.transform.DOScale(0.6f, 1).OnComplete(() => {
+                spawned.AddComponent<FixedJoint>();
+                spawned.GetComponent<FixedJoint>().connectedBody = _stackPivot.transform.parent.GetComponent<Rigidbody>();
+            });
         }
-       
+
+
+
+
+
+
     }
 }

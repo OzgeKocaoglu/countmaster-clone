@@ -552,8 +552,8 @@ GameObject:
   m_Component:
   - component: {fileID: 3910480916337374360}
   - component: {fileID: 4399736461105819171}
-  - component: {fileID: 4399736461105819357}
-  - component: {fileID: 4399736461105819356}
+  - component: {fileID: 8769300082045524806}
+  - component: {fileID: 7406514035464364870}
   m_Layer: 0
   m_Name: Character
   m_TagString: Untagged
@@ -570,7 +570,7 @@ Transform:
   m_GameObject: {fileID: 4399736461105819170}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
   m_LocalPosition: {x: 0, y: 0.12, z: 0}
-  m_LocalScale: {x: 0.1, y: 0.1, z: 0.1}
+  m_LocalScale: {x: 0.6, y: 0.6, z: 0.6}
   m_Children:
   - {fileID: 8609580724277036162}
   - {fileID: 916860761383888562}
@@ -596,7 +596,23 @@ Animator:
   m_HasTransformHierarchy: 1
   m_AllowConstantClipSamplingOptimization: 1
   m_KeepAnimatorControllerStateOnDisable: 0
---- !u!136 &4399736461105819357
+--- !u!54 &8769300082045524806
+Rigidbody:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 4399736461105819170}
+  serializedVersion: 2
+  m_Mass: 20
+  m_Drag: 30
+  m_AngularDrag: 30
+  m_UseGravity: 1
+  m_IsKinematic: 0
+  m_Interpolate: 0
+  m_Constraints: 116
+  m_CollisionDetection: 2
+--- !u!136 &7406514035464364870
 CapsuleCollider:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -606,26 +622,10 @@ CapsuleCollider:
   m_Material: {fileID: 0}
   m_IsTrigger: 0
   m_Enabled: 1
-  m_Radius: 0.48829317
-  m_Height: 2.0625663
+  m_Radius: 0.5
+  m_Height: 1
   m_Direction: 1
-  m_Center: {x: -0.031470656, y: 0.96762633, z: -0.0217949}
---- !u!54 &4399736461105819356
-Rigidbody:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 4399736461105819170}
-  serializedVersion: 2
-  m_Mass: 1
-  m_Drag: 5
-  m_AngularDrag: 5
-  m_UseGravity: 1
-  m_IsKinematic: 0
-  m_Interpolate: 1
-  m_Constraints: 116
-  m_CollisionDetection: 3
+  m_Center: {x: 0, y: 0, z: 0}
 --- !u!1 &4500624645988908800
 GameObject:
   m_ObjectHideFlags: 0

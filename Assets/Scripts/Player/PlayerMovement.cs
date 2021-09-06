@@ -6,9 +6,10 @@ public class PlayerMovement : MonoBehaviour
 {
     [SerializeField] private float _forwardSpeed;
     [SerializeField] private float _swerveSpeed;
-    [SerializeField] private float _minHorizontalMovementBorder;
-    [SerializeField] private float _maxHorizontalMovementBorder;
-    [SerializeField] private DynamicJoystick joystick;
+   [SerializeField] private DynamicJoystick joystick;
+    private float _minHorizontalMovementBorder = -3.45f;
+    private float _maxHorizontalMovementBorder = 3.45f;
+
 
     private void Update()
     {
