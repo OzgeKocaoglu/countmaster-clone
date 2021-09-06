@@ -568,9 +568,9 @@ Transform:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 4399736461105819170}
-  m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
   m_LocalPosition: {x: 0, y: 0.12, z: 0}
-  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_LocalScale: {x: 0.1, y: 0.1, z: 0.1}
   m_Children:
   - {fileID: 8609580724277036162}
   - {fileID: 916860761383888562}
@@ -606,10 +606,10 @@ CapsuleCollider:
   m_Material: {fileID: 0}
   m_IsTrigger: 0
   m_Enabled: 1
-  m_Radius: 0.30741832
+  m_Radius: 0.48829317
   m_Height: 2.0625663
   m_Direction: 1
-  m_Center: {x: 0, y: 0.96762633, z: -0.021794885}
+  m_Center: {x: -0.031470656, y: 0.96762633, z: -0.0217949}
 --- !u!54 &4399736461105819356
 Rigidbody:
   m_ObjectHideFlags: 0
@@ -619,13 +619,13 @@ Rigidbody:
   m_GameObject: {fileID: 4399736461105819170}
   serializedVersion: 2
   m_Mass: 1
-  m_Drag: 2
-  m_AngularDrag: 2
+  m_Drag: 5
+  m_AngularDrag: 5
   m_UseGravity: 1
   m_IsKinematic: 0
-  m_Interpolate: 0
-  m_Constraints: 112
-  m_CollisionDetection: 1
+  m_Interpolate: 1
+  m_Constraints: 116
+  m_CollisionDetection: 3
 --- !u!1 &4500624645988908800
 GameObject:
   m_ObjectHideFlags: 0

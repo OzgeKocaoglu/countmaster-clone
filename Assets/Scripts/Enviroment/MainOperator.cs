@@ -4,9 +4,10 @@ using UnityEngine;
 
 public class MainOperator : MonoBehaviour
 {
-    public delegate void MainOperatorHandler();
+    public delegate void MainOperatorHandler(int id);
     public static MainOperatorHandler On_OperatorTriggered;
     public BoxCollider[] colliders;
+    public int id;
 
     private void Awake()
     {
@@ -19,11 +20,14 @@ public class MainOperator : MonoBehaviour
         On_OperatorTriggered -= DestoryOperatorColliders;
     }
 
-    private void DestoryOperatorColliders()
+    private void DestoryOperatorColliders(int id)
     {
-        foreach(var collider in colliders)
+        if(id == this.id)
         {
-            collider.enabled = false;
+            foreach (var collider in colliders)
+            {
+                collider.enabled = false;
+            }
         }
     }
 }

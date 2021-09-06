@@ -2,11 +2,14 @@
 using System.Collections.Generic;
 using UnityEngine;
 using System;
+using DG.Tweening;
 
 public class StackManager : MonoBehaviour
 {
     [SerializeField] private GameObject _stackPivot;
     private int _numberOfStackCount;
+    public float radius = 1f;
+    private List<GameObject> stackObjects;
 
     public int NumberOfStackCount
     {
@@ -65,11 +68,14 @@ public class StackManager : MonoBehaviour
     private void CreateCharacter(int beforeNumberOfStack, int lastNumberOfStack)
     {
         int tempCount = beforeNumberOfStack;
+
         while(tempCount != lastNumberOfStack)
         {
-            GameObject temp = ObjectManager.Instance.SpawnFromPool("Character", _stackPivot.transform.position, Quaternion.identity);
+            GameObject temp = ObjectManager.Instance.SpawnFromPool(Constants.Character, _stackPivot.transform.position, Quaternion.identity);
             temp.transform.parent = _stackPivot.transform;
+            temp.transform.DOScale(1, 1);
             tempCount++;
         }
+       
     }
 }
