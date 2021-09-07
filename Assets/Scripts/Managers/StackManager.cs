@@ -11,6 +11,7 @@ public class StackManager : MonoBehaviour
     private int numberOfObjects = 4;
     public float radius = 1f;
     private List<GameObject> stackObjects;
+    [SerializeField] private GameObject circle;
 
     public int NumberOfStackCount
     {
@@ -81,6 +82,7 @@ public class StackManager : MonoBehaviour
                 spawned.AddComponent<FixedJoint>();
                 spawned.GetComponent<FixedJoint>().connectedBody = _stackPivot.transform.parent.GetComponent<Rigidbody>();
             });
+            circle.transform.DOScale(circle.transform.localScale + Vector3.one * 0.5f, 1);
         }
 
 
