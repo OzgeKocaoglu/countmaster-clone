@@ -9,7 +9,6 @@ public class StackManager : MonoBehaviour
     [SerializeField] private GameObject _stackPivot;
     private int _numberOfStackCount;
     private int numberOfObjects = 4;
-    public float radius = 1f;
     private List<GameObject> stackObjects;
     [SerializeField] private GameObject circle;
 
@@ -36,9 +35,10 @@ public class StackManager : MonoBehaviour
 
     private void Awake()
     {
+        NumberOfStackCount = 1;
         On_AddingStack += AddCharacterOnStack;
         On_StackNumberChange += CreateCharacter;
-        NumberOfStackCount = 1;
+
     }
 
     private void OnDestroy()
@@ -82,13 +82,7 @@ public class StackManager : MonoBehaviour
                 spawned.AddComponent<FixedJoint>();
                 spawned.GetComponent<FixedJoint>().connectedBody = _stackPivot.transform.parent.GetComponent<Rigidbody>();
             });
-            circle.transform.DOScale(circle.transform.localScale + Vector3.one * 0.5f, 1);
+            circle.transform.DOScale(circle.transform.localScale + Vector3.one * 1.35f, 1);
         }
-
-
-
-
-
-
     }
 }

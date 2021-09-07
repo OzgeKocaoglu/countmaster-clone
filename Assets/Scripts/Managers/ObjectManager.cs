@@ -16,36 +16,13 @@ public class ObjectManager: MonoBehaviour
     public void Awake()
     {
         Instance = this;
-        Active = true;
-    }
-    #endregion 
-    public List<Pool> pools;
-    private bool isActive;
-    public Dictionary<string, Queue<GameObject>> poolDictionary;
-
-    public bool Active
-    {
-        get { return isActive; }
-        set
-        {
-            isActive = value;
-        }
-    }
-
-    public void Start()
-    {
-        if (!isActive)
-        {
-            this.gameObject.SetActive(false);
-            return;
-        }
-
+   
         poolDictionary = new Dictionary<string, Queue<GameObject>>();
-        foreach(Pool pool in pools)
+        foreach (Pool pool in pools)
         {
             Queue<GameObject> objectPool = new Queue<GameObject>();
 
-            for(int i=0; i < pool.size; i++)
+            for (int i = 0; i < pool.size; i++)
             {
                 GameObject obj = Instantiate(pool.prefab);
                 obj.SetActive(false);
@@ -54,6 +31,14 @@ public class ObjectManager: MonoBehaviour
 
             poolDictionary.Add(pool.tag, objectPool);
         }
+    }
+    #endregion 
+    public List<Pool> pools;
+    public Dictionary<string, Queue<GameObject>> poolDictionary;
+
+    public void Start()
+    {
+       
     }
 
     public GameObject SpawnFromPool(string tag, Vector3 position, Quaternion rotation)
@@ -64,7 +49,7 @@ public class ObjectManager: MonoBehaviour
             return null;
         }
         GameObject objectToSpawn = poolDictionary[tag].Dequeue();
-
+        Debug.Log("Object spawned");
         objectToSpawn.SetActive(true);
         objectToSpawn.transform.position = position;
         objectToSpawn.transform.rotation = rotation;

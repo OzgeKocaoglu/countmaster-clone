@@ -299,7 +299,7 @@ SkinnedMeshRenderer:
   m_RenderingLayerMask: 1
   m_RendererPriority: 0
   m_Materials:
-  - {fileID: 2100000, guid: 5ad7889d16915cf44b86b94347bda192, type: 2}
+  - {fileID: 2100000, guid: 162e4a16b6719de49a5932cbbc27db1a, type: 2}
   m_StaticBatchInfo:
     firstSubMesh: 0
     subMeshCount: 0
@@ -555,7 +555,7 @@ GameObject:
   - component: {fileID: 8769300082045524806}
   - component: {fileID: 7406514035464364870}
   m_Layer: 0
-  m_Name: Character
+  m_Name: Enemy Character
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
