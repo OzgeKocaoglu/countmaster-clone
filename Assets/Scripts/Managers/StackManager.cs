@@ -32,13 +32,13 @@ public class StackManager : MonoBehaviour
 
     public delegate void StackHandler(int numOfCharacter, OperatorType operatorType);
     public static StackHandler On_AddingStack;
-    public event Action<int, int> On_StackNumberChange;
+    public static event Action<int, int> On_StackNumberChange;
 
     private void Awake()
     {
         On_AddingStack += AddCharacterOnStack;
         On_StackNumberChange += CreateCharacter;
-        _numberOfStackCount = 1;
+        NumberOfStackCount = 1;
     }
 
     private void OnDestroy()
