@@ -6,15 +6,32 @@ public class PlayerMovement : MonoBehaviour
 {
     [SerializeField] private float _forwardSpeed;
     [SerializeField] private float _swerveSpeed;
-   [SerializeField] private DynamicJoystick joystick;
+    [SerializeField] private DynamicJoystick joystick;
+    private bool isPlayerMovementFreeze;
     private float _minHorizontalMovementBorder = -3.45f;
     private float _maxHorizontalMovementBorder = 3.45f;
+
+    public delegate void PlayerMovementHandler(bool isPlayerMovementFreezed);
+    public static PlayerMovementHandler On_PlayerMovementFreezed;
+
+    private void Awake()
+    {
+        On_PlayerMovementFreezed += FreezeMovementSwicth;
+    }
+
+    private void OnDestroy()
+    {
+        On_PlayerMovementFreezed -= FreezeMovementSwicth;
+    }
 
 
     private void Update()
     {
-        ForwardMove();
-        SwerveMove();
+        if (!isPlayerMovementFreeze)
+        {
+            ForwardMove();
+            SwerveMove();
+        }
     }
 
     private void ForwardMove()
@@ -27,4 +44,12 @@ public class PlayerMovement : MonoBehaviour
         Vector3 direction = new Vector3(clampedHorizontal, transform.position.y, transform.position.z);
         transform.position = Vector3.MoveTowards(transform.position, direction, 1);
     }
+    private void FreezeMovementSwicth(bool val)
+    {
+        if(val != isPlayerMovementFreeze)
+        {
+            isPlayerMovementFreeze = val;
+        }
+    }
+
 }

@@ -30,7 +30,9 @@ public class StackManager : MonoBehaviour
     }
 
     public delegate void StackHandler(int numOfCharacter, OperatorType operatorType);
+    public delegate void StackDestoryHandler(GameObject obj);
     public static StackHandler On_AddingStack;
+    public static StackDestoryHandler On_RemovingStack;
     public static event Action<int, int> On_StackNumberChange;
 
     private void Awake()
@@ -38,6 +40,7 @@ public class StackManager : MonoBehaviour
         NumberOfStackCount = 1;
         On_AddingStack += AddCharacterOnStack;
         On_StackNumberChange += CreateCharacter;
+        On_RemovingStack += RemoveCharacterOnStack;
 
     }
 
@@ -45,6 +48,7 @@ public class StackManager : MonoBehaviour
     {
         On_AddingStack -= AddCharacterOnStack;
         On_StackNumberChange -= CreateCharacter;
+        On_RemovingStack -= RemoveCharacterOnStack;
     }
 
     private void AddCharacterOnStack(int numOfCharacter, OperatorType operatorType)
@@ -67,22 +71,31 @@ public class StackManager : MonoBehaviour
                 break;
         }
     }
+    private void RemoveCharacterOnStack(GameObject obj)
+    {
+        ObjectManager.Instance.DestoryFromPool(Constants.Character, obj);
+        NumberOfStackCount--;
+    }
     private void CreateCharacter(int beforeNumberOfStack, int lastNumberOfStack)
     {
         int tempCount = beforeNumberOfStack;
 
-        for (int i = 0; i < lastNumberOfStack; i++)
-        {
+        while(tempCount != lastNumberOfStack) { 
             var spawned = ObjectManager.Instance.SpawnFromPool(Constants.Character, _stackPivot.transform.position, Quaternion.identity);
 
             spawned.transform.parent = _stackPivot.transform;
             spawned.GetComponent<Rigidbody>().velocity = transform.TransformDirection(Vector3.forward * 3);
            
             spawned.transform.DOScale(0.6f, 1).OnComplete(() => {
-                spawned.AddComponent<FixedJoint>();
-                spawned.GetComponent<FixedJoint>().connectedBody = _stackPivot.transform.parent.GetComponent<Rigidbody>();
+                //spawned.AddComponent<FixedJoint>();
+                //spawned.GetComponent<FixedJoint>().connectedBody = _stackPivot.transform.parent.GetComponent<Rigidbody>();
             });
             circle.transform.DOScale(circle.transform.localScale + Vector3.one * 1.35f, 1);
+            tempCount++;
         }
+    }
+    private void DestoryCharacter()
+    {
+
     }
 }
