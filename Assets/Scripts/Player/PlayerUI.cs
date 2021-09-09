@@ -7,12 +7,12 @@ public class PlayerUI : MonoBehaviour
 
     private void Awake()
     {
-        StackManager.On_StackNumberChange += ChangeStackText;
+        StackManager.On_StackNumberChangeUI += ChangeStackText;
     }
 
     private void OnDestroy()
     {
-        StackManager.On_StackNumberChange -= ChangeStackText;
+        StackManager.On_StackNumberChangeUI -= ChangeStackText;
     }
 
     private void ChangeStackText(int before, int lastNumberStack)

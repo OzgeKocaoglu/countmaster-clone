@@ -32,6 +32,10 @@ public class PlayerMovement : MonoBehaviour
             ForwardMove();
             SwerveMove();
         }
+        else
+        {
+            FreezedMovement();
+        }
     }
 
     private void ForwardMove()
@@ -43,6 +47,10 @@ public class PlayerMovement : MonoBehaviour
         float clampedHorizontal = Mathf.Clamp(transform.position.x + joystick.Horizontal * _swerveSpeed * Time.deltaTime, _minHorizontalMovementBorder, _maxHorizontalMovementBorder);
         Vector3 direction = new Vector3(clampedHorizontal, transform.position.y, transform.position.z);
         transform.position = Vector3.MoveTowards(transform.position, direction, 1);
+    }
+    private void FreezedMovement()
+    {
+        transform.Translate(transform.forward * Time.deltaTime * _forwardSpeed * 0.1f);
     }
     private void FreezeMovementSwicth(bool val)
     {

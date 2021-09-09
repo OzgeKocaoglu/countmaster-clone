@@ -22,33 +22,37 @@ public class StackManager : MonoBehaviour
         {
             if(_numberOfStackCount != value)
             {
-                On_StackNumberChange?.Invoke(_numberOfStackCount, value);
+                
+                if (_numberOfStackCount - value < 0)
+                {
+                    On_StackNumberChange?.Invoke(_numberOfStackCount, value);
+                }
                 _numberOfStackCount = value;
+                Debug.Log(_numberOfStackCount);
+                On_StackNumberChangeUI?.Invoke(_numberOfStackCount, value);
+
             }
 
         }
     }
 
     public delegate void StackHandler(int numOfCharacter, OperatorType operatorType);
-    public delegate void StackDestoryHandler();
     public static StackHandler On_AddingStack;
-    public static StackDestoryHandler On_RemovingStack;
-    public static event Action<int, int> On_StackNumberChange;
+    public static event Action<int, int> On_StackNumberChange, On_StackNumberChangeUI;
 
     private void Awake()
     {
         NumberOfStackCount = 1;
         On_AddingStack += AddCharacterOnStack;
         On_StackNumberChange += CreateCharacter;
-        On_RemovingStack += RemoveCharacterOnStack;
 
     }
+
 
     private void OnDestroy()
     {
         On_AddingStack -= AddCharacterOnStack;
         On_StackNumberChange -= CreateCharacter;
-        On_RemovingStack -= RemoveCharacterOnStack;
     }
 
     private void AddCharacterOnStack(int numOfCharacter, OperatorType operatorType)
@@ -71,11 +75,10 @@ public class StackManager : MonoBehaviour
                 break;
         }
     }
-    private void RemoveCharacterOnStack()
+    public void RemoveCharacterOnStack()
     {
-        /*NumberOfStackCount--;
-        circle.transform.DOScale(circle.transform.localScale - Vector3.one * 1.35f, 1);*/
-
+        NumberOfStackCount--;
+        //circle.transform.DOScale(circle.transform.localScale - Vector3.one * 1.35f, 1);
     }
     private void CreateCharacter(int beforeNumberOfStack, int lastNumberOfStack)
     {

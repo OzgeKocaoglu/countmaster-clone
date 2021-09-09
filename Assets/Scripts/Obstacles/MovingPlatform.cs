@@ -18,9 +18,10 @@ public class MovingPlatform : Obstacle
         characterRigidbody.constraints = RigidbodyConstraints.FreezeRotation;
         characterRigidbody.angularDrag = 0;
         characterRigidbody.drag = 0;
-        if(obj.transform.position.y < -2)
+        if(obj.transform.position.y < 0)
         {
-            obj.SetActive(false);
+            ObjectManager.Instance.DestoryFromPool(Constants.Character,obj);
+            FindObjectOfType<StackManager>().NumberOfStackCount--;
         }
     }
 
@@ -28,6 +29,8 @@ public class MovingPlatform : Obstacle
     {
         Rigidbody characterRigidbody = obj.GetComponent<Rigidbody>();
         characterRigidbody.constraints = RigidbodyConstraints.FreezePositionY;
+        characterRigidbody.angularDrag = 30;
+        characterRigidbody.drag = 30;
     }
 
     private void OnTriggerEnter(Collider other)

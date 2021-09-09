@@ -25,13 +25,13 @@ public class EnemySpawner : MonoBehaviour
             {
                 currentEnemyNumber = value;
                 On_EnemySpawnerCountChange?.Invoke(value);
-                Debug.Log("ENEMY SPAWNER COUNT:: " + currentEnemyNumber);
             }
             else
             {
                 EnemyTriggerZone.On_EnemyFinish?.Invoke();
                 PlayerMovement.On_PlayerMovementFreezed?.Invoke(false);
                 EnemyUI.On_Closed?.Invoke();
+                FindObjectOfType<StackManager>().NumberOfStackCount -= enemyNumber;
             }
         }
     }
