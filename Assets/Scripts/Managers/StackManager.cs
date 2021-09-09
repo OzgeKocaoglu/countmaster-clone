@@ -30,7 +30,7 @@ public class StackManager : MonoBehaviour
     }
 
     public delegate void StackHandler(int numOfCharacter, OperatorType operatorType);
-    public delegate void StackDestoryHandler(GameObject obj);
+    public delegate void StackDestoryHandler();
     public static StackHandler On_AddingStack;
     public static StackDestoryHandler On_RemovingStack;
     public static event Action<int, int> On_StackNumberChange;
@@ -71,10 +71,11 @@ public class StackManager : MonoBehaviour
                 break;
         }
     }
-    private void RemoveCharacterOnStack(GameObject obj)
+    private void RemoveCharacterOnStack()
     {
-        ObjectManager.Instance.DestoryFromPool(Constants.Character, obj);
-        NumberOfStackCount--;
+        /*NumberOfStackCount--;
+        circle.transform.DOScale(circle.transform.localScale - Vector3.one * 1.35f, 1);*/
+
     }
     private void CreateCharacter(int beforeNumberOfStack, int lastNumberOfStack)
     {
@@ -85,17 +86,10 @@ public class StackManager : MonoBehaviour
 
             spawned.transform.parent = _stackPivot.transform;
             spawned.GetComponent<Rigidbody>().velocity = transform.TransformDirection(Vector3.forward * 3);
-           
-            spawned.transform.DOScale(0.6f, 1).OnComplete(() => {
-                //spawned.AddComponent<FixedJoint>();
-                //spawned.GetComponent<FixedJoint>().connectedBody = _stackPivot.transform.parent.GetComponent<Rigidbody>();
-            });
+            spawned.transform.position = new Vector3(spawned.transform.position.x, 0.2f, spawned.transform.position.z);
+            spawned.transform.DOScale(0.6f, 1);
             circle.transform.DOScale(circle.transform.localScale + Vector3.one * 1.35f, 1);
             tempCount++;
         }
-    }
-    private void DestoryCharacter()
-    {
-
     }
 }

@@ -8,11 +8,13 @@ public class Character : MonoBehaviour
     public delegate void CharacterHandler(bool isAttack);
     public static CharacterHandler On_CharacterAttackToPlayer;
     GameObject closestCharacter;
+    StackManager stackManager;
     private bool isAttacking;
 
     private void Awake()
     {
         On_CharacterAttackToPlayer += AttackSwitch;
+        stackManager = FindObjectOfType<StackManager>();
     }
 
     private void OnDestroy()
@@ -40,7 +42,7 @@ public class Character : MonoBehaviour
         if (collision.gameObject.tag == Constants.Character)
         {
             EnemySpawner.On_EnemyDestoryChange?.Invoke(this.gameObject);
-            collision.gameObject.SetActive(false);
+            ObjectManager.Instance.DestoryFromPool(Constants.Character, collision.gameObject);
         }
     }
 

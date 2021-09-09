@@ -14,7 +14,7 @@ public class PlayerCharacter : MonoBehaviour
     {
         if (collision.gameObject.tag == Constants.Enemy)
         {
-            //StackManager.On_RemovingStack?.Invoke(this.gameObject);
+            StackManager.On_RemovingStack?.Invoke();
             Debug.Log("Here");
         }
     }
