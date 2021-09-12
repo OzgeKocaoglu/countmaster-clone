@@ -18,11 +18,6 @@ public class MovingPlatform : Obstacle
         characterRigidbody.constraints = RigidbodyConstraints.FreezeRotation;
         characterRigidbody.angularDrag = 0;
         characterRigidbody.drag = 0;
-        if(obj.transform.position.y < 0)
-        {
-            ObjectManager.Instance.DestoryFromPool(Constants.Character,obj);
-            FindObjectOfType<StackManager>().NumberOfStackCount--;
-        }
     }
 
     public override void ExitedTriggerObstacle(GameObject obj)
